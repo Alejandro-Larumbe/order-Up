@@ -1,13 +1,14 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.schema import Column, Table, Integer, String
+from sqlalchemy.schema import Column, Table
+from sqlalchemy.types import String, Integer
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
 db = SQLAlchemy()
 
 
-class Employee(db.model, UserMixin):
+class Employee(db.Model, UserMixin):
     __tablename__ = 'employees'
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
