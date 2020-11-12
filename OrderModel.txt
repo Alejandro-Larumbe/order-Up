@@ -1,0 +1,9 @@
+Order Table
+  EmployeeId
+  TableId
+  End: (boolean)
+
+OrderDetail
+  id
+  orderId
+  menuItemId

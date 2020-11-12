@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.schema import Column, Table, ForeignKey
-from sqlalchemy.types import String, Integer, Float
+from sqlalchemy.types import String, Integer, Float, Boolean
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -58,3 +58,17 @@ class Table(db.Model):
     id = Column(Integer, primary_key=True)
     number = Column(Integer, nullable=False, unique=True)
     capacity = Column(Integer, nullable=False)
+
+
+class Order(db.Model):
+  __tablename__= 'orders'
+  id = Column(Integer, primary_key=True)
+  employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
+  table_id = Column(Integer, ForeignKey('tables.id'), nullable=False)
+  finished = Column(Boolean, nullable=False, default=False)
+
+class OrderDetail(db.Model):
+  __tablename__= 'order_details'
+  id = Column(Integer, primary_key=True)
+  order_id = Column(Integer, ForeignKey('orders.id'), nullable=False)
+  menu_item_id = Column(Integer, ForeignKey('menu_items.id'), nullable=False)
